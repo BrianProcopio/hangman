@@ -113,61 +113,64 @@ class Hangman
 
     public function drawBoard($badAttempts)
     {
-        $string  = " __          \n";
-        $string .= " ||==========\n";
-        $string .= " || //      |\n";
+        $string  = "                          __          \n";
+        $string .= "                          ||==========\n";
+        $string .= "                          || //      |\n";
 
         switch ($badAttempts) {
             case 0:
-                $string .= " ||//\n";
-                $string .= " ||\n";
-                $string .= " ||\n";
-                $string .= " ||\n";
+                $string .= "                          ||//\n";
+                $string .= "                          ||\n";
+                $string .= "                          ||\n";
+                $string .= "                          ||\n";
                 break;
             case 1:
-                $string .= " ||//       O\n";
-                $string .= " ||\n";
-                $string .= " ||\n";
-                $string .= " ||\n";
+                $string .= "                          ||//       O\n";
+                $string .= "                          ||\n";
+                $string .= "                          ||\n";
+                $string .= "                          ||\n";
                 break;
             case 2:
-                $string .= " ||//       O\n";
-                $string .= " ||         |\n";
-                $string .= " ||\n";
-                $string .= " ||\n";
+                $string .= "                          ||//       O\n";
+                $string .= "                          ||         |\n";
+                $string .= "                          ||\n";
+                $string .= "                          ||\n";
                 break;
             case 3:
-                $string .= " ||//       O\n";
-                $string .= " ||       --|\n";
-                $string .= " ||\n";
-                $string .= " ||\n";
+                $string .= "                          ||//       O\n";
+                $string .= "                          ||       --|\n";
+                $string .= "                          ||\n";
+                $string .= "                          ||\n";
                 break;
             case 4:
-                $string .= " ||//       O\n";
-                $string .= " ||       --|--\n";
-                $string .= " ||\n";
-                $string .= " ||\n";
+                $string .= "                          ||//       O\n";
+                $string .= "                          ||       --|--\n";
+                $string .= "                          ||\n";
+                $string .= "                          ||\n";
                 break;
             case 5:
-                $string .= " ||//       O\n";
-                $string .= " ||       --|--\n";
-                $string .= " ||         |\n";
-                $string .= " ||\n";
+                $string .= "                          ||//       O\n";
+                $string .= "                          ||       --|--\n";
+                $string .= "                          ||         |\n";
+                $string .= "                          ||\n";
                 break;
             case 6:
-                $string .= " ||//       O\n";
-                $string .= " ||       --|--\n";
-                $string .= " ||         |\n";
-                $string .= " ||        /\n";
+                $string .= "                          ||//       O\n";
+                $string .= "                          ||       --|--\n";
+                $string .= "                          ||         |\n";
+                $string .= "                          ||        /\n";
                 break;
             default:
-                $string .= " ||//       O\n";
-                $string .= " ||       --|--\n";
-                $string .= " ||         |\n";
-                $string .= " ||        / \\\n";
+                $string .= "                          ||//       O\n";
+                $string .= "                          ||       --|--\n";
+                $string .= "                          ||         |\n";
+                $string .= "                          ||        / \\\n";
         }
 
-        $string .= "––––         \n\n";
+        $string .= "                          ||\n";
+        $string .= "                          ||\n";
+        $string .= "                          ||\n";
+        $string .= "                      ––-––––-––      \n\n";
 
         return $string;
     }

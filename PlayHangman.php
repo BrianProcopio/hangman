@@ -19,57 +19,68 @@ $playerNameHandle = fopen("php://stdin", "r");
 $playerName = fgets($playerNameHandle);
 fclose($playerNameHandle);
 
-echo "\nGood " . $time . " " . trim($playerName) . ". Would you like to play hangman? ";
+echo "\033[8;0H";
+echo "Good " . $time . " " . trim($playerName) . ". Would you like to play hangman? ";
 
 $playHandle = fopen("php://stdin", "r");
 $play = fgets($playHandle);
 if (substr(trim(strtolower($play)), 0, 1) != 'y') {
-    echo "\nMaybe next time.\n";
+    echo "\033[8;0H\r\033[K";
+    echo "Maybe next time.\n";
     exit;
 }
 fclose($playHandle);
 
-echo "\n";
+echo "\033[8;0H\r\033[K";
 echo "Great. Let's play!\n\n";
+sleep(1);
 
 $hangman = new classes\Hangman();
 $badAttempts = 0;
 $winner = false;
 
 while ($badAttempts < 7 && !$winner) {
-    echo "Your available letters are: \n";
-    echo implode(", ", $hangman->getAvailableLetters()) . "\n\n";
+    echo "\033[8;0H\r\033[K";
+    echo "Available letters: ";
+    echo implode(", ", $hangman->getAvailableLetters()) . "\n";
+    echo "Used letters: ";
+    echo implode(", ", $hangman->getUsedLetters()) . "\n\n";
 
     echo $hangman->drawBoard($badAttempts);
-    echo $hangman->getTiles();
+    echo "                         " . $hangman->getTiles();
 
-    echo "\n\nPick a letter: ";
+    echo "\n\n\r\033[K";
+    echo "Pick a letter: ";
     $letterHandle = fopen("php://stdin", "r");
     $chosenLetter = fgets($letterHandle);
     fclose($letterHandle);
 
     if (!$hangman->duplicateLetter(trim($chosenLetter))) {
         if ($hangman->checkLetter(trim($chosenLetter))) {
+            echo "\r\033[K";
             echo "\nYes! " . trim($chosenLetter) . " was found in the word.\n\n";
 
             if ($hangman->hasWord()) {
                 $winner = true;
             }
         } else {
+            echo "\r\033[K";
             echo "\nSo sorry, " . trim($chosenLetter) . " was not found in the word.\n\n";
             $badAttempts++;
         }
     } else {
+        echo "\r\033[K";
         echo "\nYou already guessed that letter. Try again.\n\n";
     }
 }
 
-if ($winner) {
-    echo $hangman->drawBoard($badAttempts);
-    echo $hangman->getTiles();
-    echo "\n\nYou Won!!\n\n";
-} else {
-    echo $hangman->drawBoard($badAttempts);
-    echo $hangman->getTiles();
-    echo "\n\nYou Lose! Better luck next time.\n\n";
-}
+echo "\033[8;0H\r\033[K";
+echo "Available letters: ";
+echo implode(", ", $hangman->getAvailableLetters()) . "\n";
+echo "Used letters: ";
+echo implode(", ", $hangman->getUsedLetters()) . "\n\n";
+echo $hangman->drawBoard($badAttempts);
+echo "                         " . $hangman->getTiles();
+echo "\n\n\r\033[K";
+echo $winner ? "You Won!!\n\n" : "You Lose! Better luck next time.\n\n";
+echo "\r\033[K\n";
