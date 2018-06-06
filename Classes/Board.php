@@ -36,6 +36,11 @@ class Board
         return $this->randomWord->getWord();
     }
 
+    public function getWordDefinition()
+    {
+        return $this->randomWord->getDefinition();
+    }
+
     public function getTiles()
     {
         $tiles = [];

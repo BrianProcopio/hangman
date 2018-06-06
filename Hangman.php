@@ -83,5 +83,8 @@ echo implode(", ", $hangman->getUsedLetters()) . "\n\n";
 echo $hangman->drawBoard($badAttempts);
 echo "                         " . $hangman->getTiles();
 echo "\n\n\r\033[K";
-echo $winner ? "You Won! Great Job!!" :"You Lose! The word was " . $hangman->getWord() . ". Better luck next time.";
-echo "\n\n\r\033[K\n";
+echo $winner ? "You Won! Great Job!\n" : "You Lose! The word was " . $hangman->getWord() . ". Better luck next time.\n";
+echo "The word " . $hangman->getWord();
+echo $hangman->getWordDefinition() === null ? " is not defined in the oxford dictionary." :
+    " is defined in the oxford dictionary as: " . $hangman->getWordDefinition();
+echo "\n\r\033[K\n";
