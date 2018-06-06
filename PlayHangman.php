@@ -83,5 +83,5 @@ echo implode(", ", $hangman->getUsedLetters()) . "\n\n";
 echo $hangman->drawBoard($badAttempts);
 echo "                         " . $hangman->getTiles();
 echo "\n\n\r\033[K";
-echo $winner ? "You Won! Great Job!!\n\n" : "You Lose! Better luck next time.\n\n";
-echo "\r\033[K\n";
+echo $winner ? "You Won! Great Job!!" :"You Lose! The word was " . $hangman->getWord() . ". Better luck next time.";
+echo "\n\n\r\033[K\n";

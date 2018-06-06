@@ -1,6 +1,8 @@
 <?php
 namespace hangman\classes;
 
+include_once '../words_alpha.txt';
+
 class RandomWord
 {
     /**
@@ -10,7 +12,19 @@ class RandomWord
 
     public function __construct()
     {
-        $this->word = "Surrender";
+        $this->setWord();
+    }
+
+    private function setWord()
+    {
+        $file = "words_alpha.txt";
+        $file_arr = file($file);
+        $num_lines = count($file_arr);
+        $last_arr_index = $num_lines - 1;
+        $rand_index = rand(0, $last_arr_index);
+        $rand_text = $file_arr[$rand_index];
+
+        $this->word = trim($rand_text);
     }
 
     public function getWord()
