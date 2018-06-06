@@ -38,7 +38,7 @@ class Board
 
     public function getWordDefinition()
     {
-        return $this->randomWord->getDefinition();
+        return $this->randomWord->getDefinition($this->getWord());
     }
 
     public function getTiles()
@@ -109,6 +109,10 @@ class Board
 
     public function duplicateLetter($letter) {
         return in_array($letter, $this->usedLetters);
+    }
+
+    public function validLetter($letter) {
+        return strlen($letter) === 1 && preg_match('/[a-zA-Z]/', $letter);
     }
 
     public function getUsedLetters()

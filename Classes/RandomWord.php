@@ -36,18 +36,45 @@ class RandomWord
         return $this->word;
     }
 
-    public function getDefinition()
+    public function getDefinition($word = null)
     {
-        $url = "https://od-api.oxforddictionaries.com/api/v1/entries/en/" . strtolower($this->getWord());
+        if ($word !== null) {
+            $url = "https://od-api.oxforddictionaries.com/api/v1/entries/en/" . strtolower($word);
+            $ch = curl_init($url);
+            curl_setopt(
+                $ch,
+                CURLOPT_HTTPHEADER,
+                ['app_id: d07c8c10', 'app_key: 92913385eab4970e740b6a4b1d58d17f']
+            );
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $response = json_decode($response, true);
+            $senses = $response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0];
+
+            if (isset($senses['definitions'])) {
+                return $senses['definitions'][0];
+            } elseif (isset($senses['crossReferenceMarkers'])) {
+                return $senses['crossReferenceMarkers'][0];
+            } else {
+                return $this->getDefinition($this->getInflection($word));
+            }
+        }
+
+        return $word;
+    }
+
+    public function getInflection($word)
+    {
+        $url = "https://od-api.oxforddictionaries.com/api/v1/inflections/en/" . strtolower($word);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['app_id: d07c8c10', 'app_key: 92913385eab4970e740b6a4b1d58d17f']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response, true);
-        $senses = $response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0];
 
-        return isset($senses['definitions']) ? $senses['definitions'][0] : $senses['crossReferenceMarkers'][0];
+        return $response['results'][0]['lexicalEntries'][0]['inflectionOf'][0]['text'];
     }
 
     public function __toString()

@@ -56,7 +56,10 @@ while ($badAttempts < 7 && !$winner) {
     $chosenLetter = fgets($letterHandle);
     fclose($letterHandle);
 
-    if (!$hangmanBoard->duplicateLetter(trim($chosenLetter))) {
+    if (!$hangmanBoard->validLetter(trim($chosenLetter))) {
+        echo "\r\033[K";
+        echo "\nPlease enter a single valid alphabetic character.\n\n";
+    } elseif (!$hangmanBoard->duplicateLetter(trim($chosenLetter))) {
         if ($hangmanBoard->checkLetter(trim($chosenLetter))) {
             echo "\r\033[K";
             echo "\nYes! " . trim($chosenLetter) . " was found in the word.\n\n";
@@ -84,8 +87,8 @@ echo $hangmanBoard->drawBoard($badAttempts);
 echo "\033[0;31m                         " . $hangmanBoard->getTiles() . "\033[0m";
 echo "\n\n\r\033[K";
 echo $winner ? "You Won! Great Job!\n" :
-    "You Lose! The word was " . $hangmanBoard->getWord() . ". Better luck next time.\n";
-echo "The word " . $hangmanBoard->getWord();
+    "You Lose! The word was \033[0;31m" . $hangmanBoard->getWord() . "\033[0m. Better luck next time.\n";
+echo "The word \033[0;31m" . $hangmanBoard->getWord() . "\033[0m";
 echo $hangmanBoard->getWordDefinition() === null ? " is not defined in the Oxford dictionary." :
     " is defined in the Oxford dictionary as: " . $hangmanBoard->getWordDefinition();
 echo "\n\r\033[K\n";
