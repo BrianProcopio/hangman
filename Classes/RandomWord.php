@@ -45,8 +45,9 @@ class RandomWord
         $response = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response, true);
+        $senses = $response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0];
 
-        return $response['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0];
+        return isset($senses['definitions']) ? $senses['definitions'][0] : $senses['crossReferenceMarkers'][0];
     }
 
     public function __toString()
