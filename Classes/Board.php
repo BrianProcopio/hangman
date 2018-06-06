@@ -118,64 +118,64 @@ class Board
 
     public function drawBoard($badAttempts)
     {
-        $string  = "                          __          \n";
-        $string .= "                          ||==========\n";
-        $string .= "                          || //      |\n";
+        $string  = "\033[0;33m                          __          \033[0m\n";
+        $string .= "\033[0;33m                          ||==========\033[0m\n";
+        $string .= "\033[0;33m                          || //      |\033[0m\n";
 
         switch ($badAttempts) {
             case 0:
-                $string .= "                          ||//\n";
-                $string .= "                          ||\n";
-                $string .= "                          ||\n";
-                $string .= "                          ||\n";
+                $string .= "\033[0;33m                          ||//\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
                 break;
             case 1:
-                $string .= "                          ||//       O\n";
-                $string .= "                          ||\n";
-                $string .= "                          ||\n";
-                $string .= "                          ||\n";
+                $string .= "\033[0;33m                          ||//       \033[0;31mO\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
                 break;
             case 2:
-                $string .= "                          ||//       O\n";
-                $string .= "                          ||         |\n";
-                $string .= "                          ||\n";
-                $string .= "                          ||\n";
+                $string .= "\033[0;33m                          ||//       \033[0;31mO\033[0m\n";
+                $string .= "\033[0;33m                          ||         \033[0;31m|\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
                 break;
             case 3:
-                $string .= "                          ||//       O\n";
-                $string .= "                          ||       --|\n";
-                $string .= "                          ||\n";
-                $string .= "                          ||\n";
+                $string .= "\033[0;33m                          ||//       \033[0;31mO\033[0m\n";
+                $string .= "\033[0;33m                          ||       \033[0;31m--|\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
                 break;
             case 4:
-                $string .= "                          ||//       O\n";
-                $string .= "                          ||       --|--\n";
-                $string .= "                          ||\n";
-                $string .= "                          ||\n";
+                $string .= "\033[0;33m                          ||//       \033[0;31mO\033[0m\n";
+                $string .= "\033[0;33m                          ||       \033[0;31m--|--\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
                 break;
             case 5:
-                $string .= "                          ||//       O\n";
-                $string .= "                          ||       --|--\n";
-                $string .= "                          ||         |\n";
-                $string .= "                          ||\n";
+                $string .= "\033[0;33m                          ||//       \033[0;31mO\033[0m\n";
+                $string .= "\033[0;33m                          ||       \033[0;31m--|--\033[0m\n";
+                $string .= "\033[0;33m                          ||         \033[0;31m|\033[0m\n";
+                $string .= "\033[0;33m                          ||\033[0m\n";
                 break;
             case 6:
-                $string .= "                          ||//       O\n";
-                $string .= "                          ||       --|--\n";
-                $string .= "                          ||         |\n";
-                $string .= "                          ||        /\n";
+                $string .= "\033[0;33m                          ||//       \033[0;31mO\033[0m\n";
+                $string .= "\033[0;33m                          ||       \033[0;31m--|--\033[0m\n";
+                $string .= "\033[0;33m                          ||         \033[0;31m|\033[0m\n";
+                $string .= "\033[0;33m                          ||        \033[0;31m/\033[0m\n";
                 break;
             default:
-                $string .= "                          ||//       O\n";
-                $string .= "                          ||       --|--\n";
-                $string .= "                          ||         |\n";
-                $string .= "                          ||        / \\\n";
+                $string .= "\033[0;33m                          ||//       \033[0;31mO\033[0m\n";
+                $string .= "\033[0;33m                          ||       \033[0;31m--|--\033[0m\n";
+                $string .= "\033[0;33m                          ||         \033[0;31m|\033[0m\n";
+                $string .= "\033[0;33m                          ||        \033[0;31m/ \\\033[0m\n";
         }
 
-        $string .= "                          ||\n";
-        $string .= "                          ||\n";
-        $string .= "                          ||\n";
-        $string .= "                      ––-––––-––      \n\n";
+        $string .= "\033[0;33m                          ||\033[0m\n";
+        $string .= "\033[0;33m                          ||\033[0m\n";
+        $string .= "\033[0;33m                          ||\033[0m\n";
+        $string .= "\033[0;33m                      ––-––––-––      \033[0m\n\n";
 
         return $string;
     }
