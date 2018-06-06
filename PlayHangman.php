@@ -7,11 +7,12 @@ $time = date('H') < 12 ? "morning" : "afternoon";
 
 echo exec('clear');
 
-echo " OO   OO      OOO      OO   OO      OOOOO     OO    OO      OOO      OO   OO\n";
-echo " OO   OO     OO OO     OOO  OO     OO         OOO  OOO     OO OO     OOO  OO\n";
-echo " OOOOOOO    OOOOOOO    OO O OO    OO  OOO     OO OO OO    OOOOOOO    OO O OO\n";
-echo " OO   OO    OO   OO    OO  OOO     OO   OO    OO    OO    OO   OO    OO  OOO\n";
-echo " OO   OO    OO   OO    OO   OO      OOOOO     OO    OO    OO   OO    OO   OO\n";
+echo "\n\n";
+echo "       OO   OO      OOO      OO   OO      OOOOO     OO    OO      OOO      OO   OO\n";
+echo "       OO   OO     OO OO     OOO  OO     OO         OOO  OOO     OO OO     OOO  OO\n";
+echo "       OOOOOOO    OOOOOOO    OO O OO    OO  OOO     OO OO OO    OOOOOOO    OO O OO\n";
+echo "       OO   OO    OO   OO    OO  OOO     OO   OO    OO    OO    OO   OO    OO  OOO\n";
+echo "       OO   OO    OO   OO    OO   OO      OOOOO     OO    OO    OO   OO    OO   OO\n";
 
 echo "\n\nGood " . $time . ". What is your name? ";
 
@@ -19,19 +20,19 @@ $playerNameHandle = fopen("php://stdin", "r");
 $playerName = fgets($playerNameHandle);
 fclose($playerNameHandle);
 
-echo "\033[8;0H";
+echo "\033[10;0H";
 echo "Good " . $time . " " . trim($playerName) . ". Would you like to play hangman? ";
 
 $playHandle = fopen("php://stdin", "r");
 $play = fgets($playHandle);
 if (substr(trim(strtolower($play)), 0, 1) != 'y') {
-    echo "\033[8;0H\r\033[K";
+    echo "\033[10;0H\r\033[K";
     echo "Maybe next time.\n";
     exit;
 }
 fclose($playHandle);
 
-echo "\033[8;0H\r\033[K";
+echo "\033[10;0H\r\033[K";
 echo "Great. Let's play!\n\n";
 sleep(1);
 
@@ -40,7 +41,7 @@ $badAttempts = 0;
 $winner = false;
 
 while ($badAttempts < 7 && !$winner) {
-    echo "\033[8;0H\r\033[K";
+    echo "\033[10;0H\r\033[K";
     echo "Available letters: ";
     echo implode(", ", $hangman->getAvailableLetters()) . "\n";
     echo "Used letters: ";
@@ -74,7 +75,7 @@ while ($badAttempts < 7 && !$winner) {
     }
 }
 
-echo "\033[8;0H\r\033[K";
+echo "\033[10;0H\r\033[K";
 echo "Available letters: ";
 echo implode(", ", $hangman->getAvailableLetters()) . "\n";
 echo "Used letters: ";
@@ -82,5 +83,5 @@ echo implode(", ", $hangman->getUsedLetters()) . "\n\n";
 echo $hangman->drawBoard($badAttempts);
 echo "                         " . $hangman->getTiles();
 echo "\n\n\r\033[K";
-echo $winner ? "You Won!!\n\n" : "You Lose! Better luck next time.\n\n";
+echo $winner ? "You Won! Great Job!!\n\n" : "You Lose! Better luck next time.\n\n";
 echo "\r\033[K\n";
