@@ -36,7 +36,7 @@ class Hangman
         return $this->randomWord->getWord();
     }
 
-    public function getTiles($usedLetters = null)
+    public function getTiles()
     {
         $tiles = [];
         $tileCount = strlen($this->getWord());
@@ -46,20 +46,24 @@ class Hangman
             $i+1 === $tileCount ? $tiles[] = "_" : $tiles[] = "_ ";
         }
 
-        if (!empty($this->getUsedLetters())) {
-            foreach ($usedLetters as $usedLetter) {
-                $hasLetter = true;
-                $positions = [];
-                while ($hasLetter === true) {
-                    $y = empty($positions) ? 0 : end($positions);
-                    $pos = stripos($usedLetter, $this->getWord(), $y);
-                    if ($pos !== false) {
-                        $correctLetters[$usedLetter] = $pos;
-                        $positions[] = $pos;
-                    } else {
-                        $hasLetter = false;
-                    }
+        foreach ($this->getUsedLetters() as $usedLetter) {
+            $positions = [];
+            $hasLetter = true;
+            while ($hasLetter === true) {
+                $pos = empty($positions) ? stripos($this->getWord(), $usedLetter) :
+                    stripos($this->getWord(), $usedLetter, end($positions)+1);
+                if ($pos !== false) {
+                    $correctLetters[$usedLetter][] = $pos;
+                    $positions[] = $pos;
+                } else {
+                    $hasLetter = false;
                 }
+            }
+        }
+
+        foreach ($correctLetters as $key => $val) {
+            foreach ($val as $tilePosition) {
+                $tiles[$tilePosition] = $key . " ";
             }
         }
 
@@ -68,7 +72,38 @@ class Hangman
 
     public function getAvailableLetters()
     {
-        return $this->availableLetters;
+        return array_diff($this->availableLetters, $this->usedLetters);
+    }
+
+    public function hasWord()
+    {
+        $correctLetterCount = 0;
+
+        foreach ($this->getUsedLetters() as $usedLetter) {
+            $positions = [];
+            $hasLetter = true;
+            while ($hasLetter === true) {
+                $pos = empty($positions) ? stripos($this->getWord(), $usedLetter) :
+                    stripos($this->getWord(), $usedLetter, end($positions)+1);
+                if ($pos !== false) {
+                    $positions[] = $pos;
+                    $correctLetterCount++;
+                } else {
+                    $hasLetter = false;
+                }
+            }
+        }
+
+        return $correctLetterCount === strlen($this->getWord());
+    }
+
+    public function checkLetter($letter) {
+        $this->usedLetters[] = strtolower($letter);
+        return stripos($this->getWord(), $letter) !== false;
+    }
+
+    public function duplicateLetter($letter) {
+        return in_array($letter, $this->usedLetters);
     }
 
     public function getUsedLetters()
@@ -76,8 +111,64 @@ class Hangman
         return $this->usedLetters;
     }
 
-    public function drawBoard()
+    public function drawBoard($badAttempts)
     {
-        return "\n \n";
+        $string  = " __          \n";
+        $string .= " ||==========\n";
+        $string .= " || //      |\n";
+
+        switch ($badAttempts) {
+            case 0:
+                $string .= " ||//\n";
+                $string .= " ||\n";
+                $string .= " ||\n";
+                $string .= " ||\n";
+                break;
+            case 1:
+                $string .= " ||//       O\n";
+                $string .= " ||\n";
+                $string .= " ||\n";
+                $string .= " ||\n";
+                break;
+            case 2:
+                $string .= " ||//       O\n";
+                $string .= " ||         |\n";
+                $string .= " ||\n";
+                $string .= " ||\n";
+                break;
+            case 3:
+                $string .= " ||//       O\n";
+                $string .= " ||       --|\n";
+                $string .= " ||\n";
+                $string .= " ||\n";
+                break;
+            case 4:
+                $string .= " ||//       O\n";
+                $string .= " ||       --|--\n";
+                $string .= " ||\n";
+                $string .= " ||\n";
+                break;
+            case 5:
+                $string .= " ||//       O\n";
+                $string .= " ||       --|--\n";
+                $string .= " ||         |\n";
+                $string .= " ||\n";
+                break;
+            case 6:
+                $string .= " ||//       O\n";
+                $string .= " ||       --|--\n";
+                $string .= " ||         |\n";
+                $string .= " ||        /\n";
+                break;
+            default:
+                $string .= " ||//       O\n";
+                $string .= " ||       --|--\n";
+                $string .= " ||         |\n";
+                $string .= " ||        / \\\n";
+        }
+
+        $string .= "––––         \n\n";
+
+        return $string;
     }
 }
