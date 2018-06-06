@@ -1,7 +1,7 @@
 <?php
 namespace hangman;
 
-include_once 'classes/Hangman.php';
+include_once 'Classes/Board.php';
 
 $time = date('H') < 12 ? "morning" : "afternoon";
 
@@ -36,7 +36,7 @@ echo "\033[10;0H\r\033[K";
 echo "Great. Let's play!\n\n";
 sleep(1);
 
-$hangman = new classes\Hangman();
+$hangman = new classes\Board();
 $badAttempts = 0;
 $winner = false;
 

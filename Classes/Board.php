@@ -1,10 +1,10 @@
 <?php
 
-namespace hangman\classes;
+namespace hangman\Classes;
 
 include_once 'RandomWord.php';
 
-class Hangman
+class Board
 {
     /**
      * @var RandomWord

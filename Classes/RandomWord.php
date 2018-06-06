@@ -1,5 +1,5 @@
 <?php
-namespace hangman\classes;
+namespace hangman\Classes;
 
 include_once '../words_alpha.txt';
 
@@ -12,10 +12,10 @@ class RandomWord
 
     public function __construct()
     {
-        $this->setWord();
+        $this->setRandomWord();
     }
 
-    private function setWord()
+    private function setRandomWord()
     {
         $file = "words_alpha.txt";
         $file_arr = file($file);
