@@ -40,7 +40,7 @@ $hangmanBoard = new classes\Board();
 $badAttempts = 0;
 $winner = false;
 
-while ($badAttempts < 7 && !$winner) {
+while ($badAttempts < 6 && !$winner) {
     echo "\e[10;0H\r\e[K";
     echo "Available letters: ";
     echo implode(", ", $hangmanBoard->getAvailableLetters()) . "\n";

@@ -142,28 +142,22 @@ class Board
             case 2:
                 $string .= "\e[0;33m                          ||//       \e[0;31mO\e[0m\n";
                 $string .= "\e[0;33m                          ||         \e[0;31m|\e[0m\n";
-                $string .= "\e[0;33m                          ||\e[0m\n";
+                $string .= "\e[0;33m                          ||         \e[0;31m|\e[0m\n";
                 $string .= "\e[0;33m                          ||\e[0m\n";
                 break;
             case 3:
                 $string .= "\e[0;33m                          ||//       \e[0;31mO\e[0m\n";
                 $string .= "\e[0;33m                          ||       \e[0;31m--|\e[0m\n";
-                $string .= "\e[0;33m                          ||\e[0m\n";
+                $string .= "\e[0;33m                          ||         \e[0;31m|\e[0m\n";
                 $string .= "\e[0;33m                          ||\e[0m\n";
                 break;
             case 4:
                 $string .= "\e[0;33m                          ||//       \e[0;31mO\e[0m\n";
                 $string .= "\e[0;33m                          ||       \e[0;31m--|--\e[0m\n";
-                $string .= "\e[0;33m                          ||\e[0m\n";
-                $string .= "\e[0;33m                          ||\e[0m\n";
-                break;
-            case 5:
-                $string .= "\e[0;33m                          ||//       \e[0;31mO\e[0m\n";
-                $string .= "\e[0;33m                          ||       \e[0;31m--|--\e[0m\n";
                 $string .= "\e[0;33m                          ||         \e[0;31m|\e[0m\n";
                 $string .= "\e[0;33m                          ||\e[0m\n";
                 break;
-            case 6:
+            case 5:
                 $string .= "\e[0;33m                          ||//       \e[0;31mO\e[0m\n";
                 $string .= "\e[0;33m                          ||       \e[0;31m--|--\e[0m\n";
                 $string .= "\e[0;33m                          ||         \e[0;31m|\e[0m\n";
