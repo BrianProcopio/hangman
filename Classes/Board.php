@@ -1,5 +1,4 @@
 <?php
-
 namespace hangman\Classes;
 
 include_once 'RandomWord.php';

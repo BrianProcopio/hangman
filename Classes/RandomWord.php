@@ -22,13 +22,9 @@ class RandomWord
         $num_lines = count($file_arr);
         $last_arr_index = $num_lines - 1;
         $rand_index = rand(0, $last_arr_index);
-        $rand_text = $file_arr[$rand_index];
+        $rand_text = trim($file_arr[$rand_index]);
 
-        if (strlen(trim($rand_text)) < 4) {
-            $this->setRandomWord();
-        }
-
-        $this->word = trim($rand_text);
+        strlen($rand_text) < 4 ? $this->setRandomWord() : $this->word = $rand_text;
     }
 
     public function getWord()
